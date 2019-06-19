@@ -36,24 +36,18 @@ function Instructions()
 
 class PlayerInput extends React.Component
 {
-    constructor(props)
-    {
-        super(props);
-
-        this.state = {
-            username: ""
-        };
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+    static propTypes = {
+        onSubmit: PropTypes.func.isRequired,
+        label: PropTypes.string.isRequired
     }
-    handleSubmit(event)
-    {
+    state = {
+        username: ""
+    }
+    handleSubmit = (event) => {
         event.preventDefault(); // prevent default browser actions.
         this.props.onSubmit(this.state.username);
     }
-    handleChange(event)
-    {
+    handleChange = (event) => {
         this.setState({
             username: event.target.value
         })
@@ -90,11 +84,6 @@ class PlayerInput extends React.Component
             </ThemeConsumer>
         )
     }
-}
-
-PlayerInput.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    label: PropTypes.string.isRequired
 }
 
 function PlayerPreview({username, onReset, label })
@@ -135,26 +124,16 @@ PlayerPreview.propTypes = {
 
 export default class Battle extends React.Component
 {
-    constructor(props)
-    {
-        super(props);
-
-        this.state = {
-            playerOne: null,
-            playerTwo: null
-        }
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleReset = this.handleReset.bind(this);
+    state = {
+        playerOne: null,
+        playerTwo: null
     }
-    handleSubmit(id, player)
-    {
+    handleSubmit = (id, player) => {
         this.setState({
             [id]: player
         })
     }
-    handleReset(id)
-    {
+    handleReset = (id) => {
         this.setState({
             [id]: null
         })
